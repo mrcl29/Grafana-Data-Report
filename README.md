@@ -70,7 +70,7 @@ Las opciones son:
 
 Primero debes asegurarte de estar en la carpeta correcta:
 ```
-cd [ruta/a/carpeta]/scripts/sample/
+cd /[root]/Grafana-Data-Report/scripts/sample/
 ```
 
 Hay que asegurarse que todos los scripts que vayas a ejecutar tengan los permisos adecuados:
@@ -97,13 +97,13 @@ Ahora podemos ejecutar el archivo desde consola:
 > ```
 > Añade una línea al final del archivo que tenga esta forma:
 > ```
-> 0 0 * * 0 /usr/bin/python3 [ruta/a/carpeta]/scripts/sample/informe.py
+> 0 0 * * 0 /usr/bin/python3 /[root]/Grafana-Data-Report/scripts/sample/informe.py
 > ```
 > Esto automatiza la ejecución para que se ejecute a las 0 horas, 0 minutos, * cualquier día del mes, * cualquier mes, 0 domingo (0-6 representa domingo a sábado).
 
 ## **Configuración de la API**
 
-Primero se debe configurar el archivo *config_flask.py* dentro de la carpeta *scripts*.
+Primero se debe configurar el archivo *config_flask.py* dentro de la carpeta *scripts*, puedes copiar la configuración de [*config_flask_sample.py*](scripts/config_flask_sample.py) y adaptarlo a tus necesidades.
 
 ![config_flask.py](assets/image_config_flask.png)
 
