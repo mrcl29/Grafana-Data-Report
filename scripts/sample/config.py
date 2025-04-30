@@ -13,8 +13,13 @@
 
 ACTIVAR_SELECCION_RANGO_DE_FECHAS = False
 DEBUG_FINAL = False
-IMG = "/[root]/Automatic-Grafana-Data-Report/scripts/assets/[sample].png"
-DATA_DIR = "/[root]/Automatic-Grafana-Data-Report/scripts/[sample]/data/"
+
+# Informacion CT
+TITULO = ""
+INFORMES_DIR = "/[root]/Grafana-Data-Report/informes/"+TITULO+"/"
+
+IMG = "/[root]/Grafana-Data-Report/scripts/assets/[sample].png"
+DATA_DIR = "/[root]/Grafana-Data-Report/scripts/"+TITULO+"/data/"
 # Informacion de autenticacion y URL base de Grafana
 GRAFANA_URL = "http://[IP]:[PORT]"
 API_KEY = ""
@@ -22,9 +27,6 @@ API_KEY = ""
 # Indica el rango de dias desde hoy para el que se quieren recoger datos de Grafana
 DAYS = 7
 
-# Informacion CT
-TITULO = ""
-INFORMES_DIR = "/[root]/Automatic-Grafana-Data-Report/informes/"+TITULO+"/"
 # ¡¡¡IMPORTANTE MENOS DE 31 CARaCTERES CADA NOMBRE!!!
 # CLAVE:[NOMBRE, TIPO(LINEAS, BARRAS), TAMAnO(PEQUEnO, MEDIANO, GRANDE), BINARIO(True, False), LEYENDA(True, False), EXTRA(MAXMIN, INFO, TABLA), EXTRA_INFO(mensaje, titulo tablas), EXTRA_INFO(unidad)]
 # Informacion Dashboards

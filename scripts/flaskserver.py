@@ -26,7 +26,7 @@ def buscar_archivo_en_subcarpetas(directorio, archivo):
 
 app = Flask(__name__)
 
-@app.route('/ejecutar_script/<dashboard_id>')
+@app.route('/grafana-data-report/<dashboard_id>')
 def ejecutar_script(dashboard_id):
     informes_dir = config_flask.INFORMES_DIR
     informes_dict = config_flask.INFORMES_DICT

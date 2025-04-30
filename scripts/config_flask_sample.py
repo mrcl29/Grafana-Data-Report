@@ -10,7 +10,7 @@
 #
 #--------------------------------------------------------------------------------
 
-INFORMES_DIR = "/root/Grafana-Data-Report/informes/"
+INFORMES_DIR = "/[root]/Grafana-Data-Report/informes/"
 
 # INFORMES_DICT = {"dashboard_id":"/absolute/route/to/script.py", "dashboard_id2":"/absolute/route/to/script2.py", ...}
-INFORMES_DICT = {"cristo":"/root/Grafana-Data-Report/scripts/CT_Cristo/informe.py", "corchero":"/root/Grafana-Data-Report/scripts/CT_Corchero/informe.py"}
+INFORMES_DICT = {"[sample]":"/[root]/Grafana-Data-Report/scripts/[sample]/informe.py"}

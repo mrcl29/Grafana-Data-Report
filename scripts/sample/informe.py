@@ -757,7 +757,7 @@ def informe(titulo, dashboards):
             # endif
 
             file_path_data_csv = os.path.join(
-                DATA_DIR+TITULO+"/"+nombre[0]+"/", DATA_CSV_NAME+valores[0]+".csv")
+                DATA_DIR+"/"+nombre[0]+"/", DATA_CSV_NAME+valores[0]+".csv")
             ws_data = nuevaHoja(
                 wb, file_path_data_csv, f"Raw Data {nombre[0]}")
 
@@ -1002,11 +1002,11 @@ def main():
     # endif
     i = 0
     for clave, valor in DASHBOARDS.items():
-        os.makedirs(DATA_DIR+TITULO+"/" + clave[0]+"/", exist_ok=True)
+        os.makedirs(DATA_DIR+"/" + clave[0]+"/", exist_ok=True)
         os.makedirs(INFORMES_DIR, exist_ok=True)
         obtenerDatosGrafana(
-            DATA_DIR+TITULO+"/"+clave[0]+"/", GRAFANA_URL, API_KEY, UIDS[i], valor)
-        excelDeDatos(DATA_DIR+TITULO+"/" + clave[0]+"/", valor)
+            DATA_DIR+"/"+clave[0]+"/", GRAFANA_URL, API_KEY, UIDS[i], valor)
+        excelDeDatos(DATA_DIR+"/" + clave[0]+"/", valor)
         i += 1
     # endfor
     print(informe("Informe Semanal CT Cristo", DASHBOARDS))

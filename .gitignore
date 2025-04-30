@@ -5,3 +5,14 @@
 **/data/
 informes/
 **/*.docx
+
+# Ignorar todo dentro de /scripts/
+scripts/*
+
+# No ignorar las carpetas /assets/ y /sampe/
+!scripts/assets/sample.png
+!scripts/sampe/
+
+# No ignorar los archivos específicos
+!scripts/config_flask_sample.py
+!scripts/flaskserver.py

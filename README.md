@@ -1,4 +1,4 @@
-# **Automatic-Grafana-Data-Report**
+# **Grafana-Data-Report**
 > [!NOTE]
 > Actualmente solo esta disponible para sistemas operativos **Linux**. No se asegura el correcto funcionamiento en Windows o MacOS.
 
@@ -132,8 +132,8 @@ Description=Servidor Flask para ejecutar script
 After=network.target
 [Service]
 User=root
-WorkingDirectory=[ruta/a/carpeta]/scripts
-ExecStart=/usr/bin/python3 [ruta/a/carpeta]/scripts/flaskserver.py
+WorkingDirectory=/[root]/Grafana-Data-Report/scripts
+ExecStart=/usr/bin/python3 /[root]/Grafana-Data-Report/scripts/flaskserver.py
 Restart=always
 RestartSec=10
 Environment="PORT=5000"
@@ -156,7 +156,7 @@ nano /etc/nginx/sites-available/flask_proxy
 Y rellenalo con las siguientes líneas:
 ```
 server {
-    location /ejecutar_script {
+    location /grafana-data-report {
         proxy_pass http://localhost:5000;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -173,7 +173,7 @@ systemctl restart nginx
 
 Ahora puedes ejecutar el script haciendo una petición HTTP de la forma:
 ```
-**http://[IP]:5000/ejecutar_script/[id]**
+http://[IP]:5000/grafana-data-report/[id]
 ```
 Donde *IP* es la direcciónd de la máquina donde has configurado la API y *id* es la **clave** asignada al script *informe.py* en la constante **INFORMES_DICT** dentro de *config_flask.py*.
 
