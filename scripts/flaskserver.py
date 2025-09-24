@@ -12,10 +12,12 @@
 # --------------------------------------------------------------------------------
 
 from flask import Flask, send_file
+import sys
 import os
 import subprocess
 import time
 import config_flask
+import importlib
 
 def buscar_archivo_en_subcarpetas(directorio, archivo):
     # Recorre todas las subcarpetas y archivos en el directorio
@@ -47,30 +49,45 @@ def ejecutar_script(dashboard_id):
         
     # Ejecutar el script de forma asincrona
     print(f"Ejecutando script: {ruta_script}")
-    process = subprocess.Popen(['python3', ruta_script], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    # process = subprocess.Popen(['python3', ruta_script],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)
+    directorio_script = os.path.dirname(ruta_script)
+    nombre_modulo = os.path.splitext(os.path.basename(ruta_script))[0]
+    # Agregar el directorio del script al sys.path si no está ya
+    if directorio_script not in sys.path:
+        sys.path.insert(0, directorio_script)
+    spec = importlib.util.spec_from_file_location(nombre_modulo, ruta_script)
+    modulo = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(modulo)
+    file_name = modulo.main()
+    # print(f"aaaaaaaa")
+    # timeout = 300  # 5 minutos
+    # start_time = time.time()
     
-    timeout = 300  # 5 minutos
-    start_time = time.time()
+    # while time.time() - start_time < timeout:
+    #     print(str(time.time()))
+    #     print(str(process.poll()))
+    #     if process.poll() is not None:  # El proceso ha terminado
+    #         print(f"El proceso ha terminado exitosamente.")
+    #         break
+    #     time.sleep(1)  # Esperar 1 segundo antes de verificar de nuevo
     
-    while time.time() - start_time < timeout:
-        if process.poll() is not None:  # El proceso ha terminado
-            print(f"El proceso ha terminado exitosamente.")
-            break
-        time.sleep(1)  # Esperar 1 segundo antes de verificar de nuevo
+    # # Verificar si el proceso termino correctamente
+    # if process.poll() is None:
+    #     print("El script tarda demasiado en ejecutarse. Terminando proceso.")
+    #     process.terminate()
+    #     return "El script tarda demasiado en ejecutarse", 504
     
-    # Verificar si el proceso termino correctamente
-    if process.poll() is None:
-        print("El script tardó demasiado en ejecutarse. Terminando proceso.")
-        process.terminate()
-        return "El script tardó demasiado en ejecutarse", 504
-    
-    # Obtener la salida del script
-    stdout, stderr = process.communicate()
-    print(f"Salida del script: {stdout}")
-    print(f"Errores del script (si los hay): {stderr}")
+    # # Obtener la salida del script
+    # for line in process.stdout:
+    #   print(line, end='')  # Muestra los logs en tiempo real
+    # process.wait()
+
+    # print(f"Salida del script: {stdout}")
+    # print(f"Errores del script (si los hay): {stderr}")
     
     # Eliminar espacios en blanco y saltos de linea del nombre del archivo
-    nombre_archivo = stdout.strip()
+    # nombre_archivo = stdout.strip()
+    nombre_archivo = file_name
     print(f"Nombre de archivo generado: {nombre_archivo}")
 
     excel_path = buscar_archivo_en_subcarpetas(informes_dir, nombre_archivo)
