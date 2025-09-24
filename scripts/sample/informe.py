@@ -1009,7 +1009,9 @@ def main():
         excelDeDatos(DATA_DIR+"/" + clave[0]+"/", valor)
         i += 1
     # endfor
-    print(informe("Informe Semanal CT Cristo", DASHBOARDS))
+    file_name = informe("Informe Semanal CT Cristo", DASHBOARDS)
+    print(file_name)
+    return file_name
 # endfunction
 
 if __name__ == "__main__":
